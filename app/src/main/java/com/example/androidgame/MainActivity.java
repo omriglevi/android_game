@@ -2,10 +2,13 @@ package com.example.androidgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,11 +22,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageView pink, black, orange, box ;
 
     //Size
+    private int screenHeight, screenWidth;
     private int frameHeight ;
     private int boxSize ;
 
     //Positions
     private float boxY ;
+    private float orangeX, orangeY ;
+    private float pinkX, pinkY ;
+    private float blackX, blackY ;
 
     //Timer
     private Timer timer = new Timer() ;
@@ -45,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
         pink = findViewById(R.id.pink) ;
         orange = findViewById(R.id.orange) ;
 
+        //Screen size
+        WindowManager windowManager = getWindowManager() ;
+        Display display = windowManager.getDefaultDisplay() ;
+        Point size = new Point();
+        display.getSize(size);
+
+        screenHeight = size.y ;
+        screenWidth = size.x ;
+
     // Init position
         orange.setX(-80.0f);
         orange.setY(-80.0f);
@@ -55,13 +71,22 @@ public class MainActivity extends AppCompatActivity {
         black.setX(-80.0f);
         black.setY(-80.0f);
 
-        //Temp
-        boxY = 500.0f ;
+
 
 
     }
 
     public void changePos(){
+
+        //Orange
+        orangeX -= 12 ;
+        if (orangeX < 0 ){
+            orangeX = screenWidth + 20 ;
+            orangeY = (float) Math.floor(Math.random() * (frameHeight - orange.getHeight()) ) ;
+        }
+        orange.setY(orangeY);
+        orange.setX(orangeX);
+
         if (action_flag){
             // Touch
             boxY -= 10 ;

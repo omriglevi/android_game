@@ -45,7 +45,7 @@
                android:id="@+id/black"
                android:layout_width="24dp"
                android:layout_height="24dp"
-               android:src="@drawable/orange"/>
+               android:src="@drawable/black"/>
 
            <ImageView
                android:id="@+id/pink"

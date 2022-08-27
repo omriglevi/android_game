@@ -2,6 +2,7 @@ package com.example.androidgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private float orangeX, orangeY ;
     private float pinkX, pinkY ;
     private float blackX, blackY ;
+
+    //Score
+    private int score ;
 
     //Timer
     private Timer timer = new Timer() ;
@@ -72,13 +76,15 @@ public class MainActivity extends AppCompatActivity {
         black.setY(-80.0f);
 
 
-
+        scoreLabel.setText("Score : "+ score);
 
     }
 
     public void changePos(){
 
-        //Orange
+        hitCheck() ;
+
+        //Orange enemy
         orangeX -= 12 ;
         if (orangeX < 0 ){
             orangeX = screenWidth + 20 ;
@@ -86,6 +92,26 @@ public class MainActivity extends AppCompatActivity {
         }
         orange.setY(orangeY);
         orange.setX(orangeX);
+
+        //Black enemy
+        blackX -= 16;
+        if(blackX < 0 ){
+            blackX = screenWidth + 10 ;
+            blackY = (float) Math.floor(Math.random() * (frameHeight - black.getHeight()) ) ;
+        }
+        black.setX(blackX);
+        black.setY(blackY);
+
+        // Pink enemy
+        pinkX -= 20 ;
+        if (pinkX < 0){
+            pinkX = screenWidth + 5000 ;
+            pinkY = (float) Math.floor(Math.random() * (frameHeight - pink.getHeight()) ) ;
+
+        }
+        pink.setY(pinkY);
+        pink.setX(pinkX);
+
 
         if (action_flag){
             // Touch
@@ -99,6 +125,50 @@ public class MainActivity extends AppCompatActivity {
         if (boxY < 0 ) boxY = 0 ;
         if (boxY > frameHeight - boxSize) boxY = frameHeight - boxSize ;
         box.setY(boxY);
+
+        scoreLabel.setText("Score " + score);
+    }
+
+
+    public void hitCheck() {
+        //Orange
+        float orangeCenterX = orangeX + orange.getWidth() / 2.0f;
+        float orangeCenterY = orangeY + orange.getHeight() / 2.0f;
+
+        if (0 <= orangeCenterX && orangeCenterX <= boxSize &&
+                boxY <= orangeCenterY && orangeCenterY <= boxY + boxSize) {
+            orangeX = 100.0f;
+            score += 10;
+        }
+
+        //Pink
+        float pinkCenterX = pinkX + pink.getWidth() / 2.0f;
+        float pinkCenterY = pinkY + pink.getHeight() / 2.0f;
+
+        if (0 <= pinkCenterX && pinkCenterX <= boxSize &&
+                boxY <= pinkCenterY && pinkCenterY <= boxY + boxSize) {
+            pinkX = 100.0f;
+            score += 30;
+        }
+
+        //Black
+        float blackCenterX = blackX + black.getWidth() / 2.0f;
+        float blackCenterY = blackY + black.getHeight() / 2.0f;
+
+        if (0 <= blackCenterX && blackCenterX <= boxSize &&
+                boxY <= blackCenterY && blackCenterY <= boxY + boxSize) {
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+
+            //Show result activity
+            Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+            intent.putExtra("SCORE", score) ;
+            startActivity(intent);
+
+
+        }
     }
 
     @Override

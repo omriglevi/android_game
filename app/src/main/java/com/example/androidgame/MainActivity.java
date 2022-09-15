@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean action_flag = false ;
     private boolean start_flag = false ;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,12 +115,13 @@ public class MainActivity extends AppCompatActivity {
         pink.setX(pinkX);
 
 
+        // Blue Movment
         if (action_flag){
             // Touch
-            boxY -= 10 ;
+            boxY -= 20 ;
         } else {
             //Release
-            boxY += 10 ;
+            boxY += 20 ;
         }
 
         //Keep our pacmen in the main box - set margins for moving
@@ -197,7 +200,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
-            },0, 20);
+                // enemy movment speed
+            },0, 15);
 
         } else{
             if (event.getAction() == MotionEvent.ACTION_DOWN){

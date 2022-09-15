@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:padding="10dp"
-        android:text="Score : 0 " />
+        android:text="@string/score" />
 
        <FrameLayout
            android:id="@+id/frame"
@@ -24,7 +24,7 @@
                android:id="@+id/startLabel"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Tap to start"
+               android:text="@string/tap_to_start"
                android:textSize="24sp"
                android:layout_gravity="center"/>
 

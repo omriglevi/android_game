@@ -11,30 +11,43 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Game Over !!!"
+        android:text="@string/game_over"
         android:textSize="30sp"
         />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textSize="30sp"
+        android:layout_marginTop="80dp" />
+    <TextView
         android:id="@+id/scoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="300"
+        android:text="0"
         android:textSize="30sp"
         android:layout_marginTop="80dp" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/high_score"
+        android:textSize="20sp"
+        android:layout_marginTop="80dp" />
+    <TextView
         android:id="@+id/highScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Highest score : 300"
-        android:textSize="20sp"
-        android:layout_marginTop="80dp" />
+        android:text="0"
+        android:textSize="20sp"/>
 
     <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Another Try"
         android:layout_marginTop="50dp"
-        android:onClick="tryAgain"/>
+        android:onClick="tryAgain"
+        android:text="@string/another_try" />
+
 </LinearLayout>
